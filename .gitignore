@@ -1,0 +1,10 @@
+# Ignore a single file
+config.py
+
+# Ignore all text files
+*.txt
+
+# Ignore a folder
+logs/
+env/
+__pycache__/
