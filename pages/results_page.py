@@ -1,10 +1,9 @@
 import time # Import time for simple waits (should be replaced by WebDriverWait for production)
 import os
 import re
-import cv2
 import re
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
+# from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
 from openpyxl import Workbook, load_workbook
 from selenium.webdriver.common.by import By

@@ -4,6 +4,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from pages.results_page import ResultsPage
+from twocaptcha import TwoCaptcha
 
 # --- CONFIGURATION ---
 URL = "https://eboardresults.com/v2/home"  # <<< REPLACE with the actual result site URL
@@ -26,14 +27,32 @@ def solve_captcha_manual(page_object):
     @param page_object: An instance of ResultsPage.
     @return: The user-provided CAPTCHA solution string.
     """
-    if page_object.save_captcha_image():
-        print("\n--- ATTENTION REQUIRED ---")
-        print("A screenshot of the CAPTCHA image has been saved as 'current_captcha.png'.")
-        print("Please solve the CAPTCHA in the open browser window.")
+
+    # Need Balance for using this api
+
+    api_key = '2358c31f76f263f593b6510fcfc88015'
+    solver = TwoCaptcha(api_key)
+
+    try:
+        result = solver.solve('normal', file='current_captcha.png')
+        print("Captcha Result:", result['code'])
+    except Exception as e:
+        print("Error:", e)
+
+       
+    # if page_object.save_captcha_image():
+    #     print("\n--- ATTENTION REQUIRED ---")
+    #     print("A screenshot of the CAPTCHA image has been saved as 'current_captcha.png'.")
+    #     print("Please solve the CAPTCHA in the open browser window.")
         
-        # Ask for manual input
-        captcha_solution = input("Enter the CAPTCHA text: ")
-        return captcha_solution.strip()
+    #     # Ask for manual input
+
+       
+
+        
+
+    #     captcha_solution = input("Enter the CAPTCHA text: ")
+    #     return captcha_solution.strip()
     return ""
 
 # --- MAIN EXECUTION FUNCTION ---
